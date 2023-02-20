@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -46,7 +47,7 @@ class ListingController extends Controller
             ->get("https://api.themoviedb.org/3/movie/$id?append_to_response=credits,videos,images")
             ->json();
 
-        dump($details);
+        // dump($details);
 
         $certifications = Http::withToken(config('services.tmdb.token'))
             ->get("https://api.themoviedb.org/3/certification/movie/list")
@@ -55,16 +56,27 @@ class ListingController extends Controller
         // dump($certifications);
 
         $comments = Comment::find_by_movieId($id);
-        // $comments = Comment::all();
-        // $comments = DB::table('comments')->where('movie_id',$id)->get();
+        
 
-        dump($comments);
+        // dump($comments);
         return view('listings.show', [
             'details' => $details,
 
             'comments' => $comments,
 
-           ]);
+        ]); 
+    }
+
+
+
+    // Store Comment 
+    public function store(Request $request,$movie_id)
+    {
+        $formFields = $request->validate([
+            'content' => 'required',
+        ]);
+        Comment::store($formFields,$movie_id);
+        return back()->with('message','comment created!');
     }
 
 }

@@ -25,6 +25,8 @@ Route::get('/listings/{listing}', [ListingController::class, 'show'] ,
     
 );
 
+// store Comment
+Route::post('/listings/{id}', [ListingController::class, 'store'])->middleware('auth');
 
 // Show User Profile
 Route::get('/profile', [UserController::class, 'show']);

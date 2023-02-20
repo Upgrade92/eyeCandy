@@ -40,8 +40,9 @@
 
             @auth
             <div class="mx-4 flex my-3 md:my-0">
+                
                 <a href="/profile" title="My profile">
-                    <img class="mx-3 w-11 rounded-full" src="{{asset('images/blank-profile-picture.png')}}" alt="">
+                    <img class="mx-3  w-11 rounded-full" src="{{asset(auth()->user()->profile_img)}}" alt="">
                 </a>
 
                 <form class="inline ml-5 my-auto" action="/logout" method="POST">

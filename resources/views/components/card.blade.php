@@ -1,5 +1,5 @@
 {{-- <div {{$attributes->merge(['class' => 'mt-8 bg-stone-600 pb-3 rounded-xl hover:scale-105'])}}> --}}
-<div class="mt-8 bg-stone-600 pb-3 rounded-xl hover:scale-105 hover:border-2 hover:border-eyecandy ease-in-out duration-100">
+<div class="mt-8 bg-stone-600 pb-3 rounded-xl scale-90 hover:scale-100 hover:border-2 hover:border-eyecandy ease-in-out duration-100">
     <a href="/listings/{{$movie['id']}}" class="">
         
         <img

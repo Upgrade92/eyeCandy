@@ -4,7 +4,7 @@
     {{-- Title Info Section --}}
     <div class="listing-info border-b-4 border-stone-600 gap-8">
 
-        <div class="container mx-auto py-16 flex flex-col md:flex-row justify-center items-center col gap-40">
+        <div class="container mx-auto py-16 px-20 flex flex-col md:flex-row justify-center items-center col gap-12">
             
             @if ($details['poster_path'])
                 <img
@@ -23,21 +23,27 @@
             
             
 
-            <div class="mx-0 md:mx-10 w-96">
+            <div class="px-10 mx-0 md:px-0 md:mx-10 ">
 
                 <h2 class="text-4xl font-semibold text-eyecandy">{{$details['title']}}</h2>
 
                 <div>
                     
-                    <p class="text-xs mt-5">Duration : {{$details['runtime']}}min</p>
-                    <p class="text-xs">Releasesd: {{\Carbon\Carbon::parse($details['release_date'])->format('M d Y')}}</p>
-                    <p class="text-xs">
+                    <p class="text-sm mt-5">
+                        <span class="text-eyecandy">Duration:</span> {{$details['runtime']}}min
+                    </p>
+                    <p class="text-sm">
+                        <span class="text-eyecandy">Releasesd:</span> {{\Carbon\Carbon::parse($details['release_date'])->format('M d Y')}}
+                    </p>
+                    <p class="text-sm">
+                        <span class="text-eyecandy">Genres:</span>
                         @foreach ($details['genres'] as $genre)
                             {{$genre['name']}}@if(!$loop ->last),@endif
-                        @endforeach
-                        
+                        @endforeach    
                     </p>
-                    <p class="text-xs">Raiting: {{number_format($details['vote_average'] * 10, 0)}}% <i class="fa-solid fa-star text-orange-500"></i></p>
+                    <p class="text-sm">
+                        <span class="text-eyecandy">Raiting:</span> {{number_format($details['vote_average'] * 10, 0)}}% <i class="fa-solid fa-star text-orange-500"></i>
+                        </p>
                     <p class="mt-10">
                         {{$details['overview']}}
                     </p>
@@ -71,34 +77,40 @@
                         
                         @if ($details["videos"]["results"])
                             
+
+                        {{-- Add List - no function yet --}}
                         {{-- <div class="mt-12">
-                            <a href='https://youtube.com/watch?v={{$details["videos"]["results"]["0"]["key"]}}' class="flex inline-flex items-center bg-eyecandy rounded-xl font-semibold px-5 py-4 hover:scale-110 hover:bg-teal-600 text-black ease-in-out duration-300 ">
-                                <i class="fa-solid fa-circle-play"></i>
-                                <p class="ml-4">Play Trailer</p>
+                            <a href='' class="w-40 flex items-center bg-eyecandy rounded-xl font-semibold px-5 py-4 hover:scale-110 hover:bg-teal-600 text-black ease-in-out duration-300 ">
+                                <i class="fa-solid fa-list"></i>
+                                <p class="ml-4">Add to list</p>
                             </a>                         
                             
                         </div> --}}
 
+
+
                         <div x-data="{ isOpen: false }" >
-                            <button class="bg-eyecandy rounded-xl font-semibold px-5 py-4 hover:scale-110 hover:bg-teal-600 text-black mt-4 ease-in-out duration-300 " @click="isOpen = true
-                                $nextTick(() => $refs.modalCloseButton.focus())"
+                            <button class="w-40 bg-eyecandy rounded-xl font-semibold px-5 py-4 hover:scale-110 hover:bg-teal-600 text-black mt-4 ease-in-out duration-300 " 
+                                    onclick="(function(){ document.getElementById('iframe_video').src = document.getElementById('iframe_video').src; 
+                                            window.location.href='#top'; })(); 
+                                            
+                                            scrollLock(true);" 
+                                    @click="isOpen = true"
                                 >
                                 <i class="fa-solid fa-circle-play"></i>
                                 Play Trailer
                             </button>
                             {{-- Video Modal --}}
-                            <div class="z-50 absolute top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show="isOpen" @keydown.escape.window="isOpen = false" >
+                            <div class="z-50 absolute top-0 left-0 w-full h-full flex items-center bg-black/75 overflow-y-auto" x-show="isOpen"  
+                                @keydown.escape.window="isOpen = false, scrollLock(false)"  @Click="isOpen = false, scrollLock(false)"
+                                >
                                 <div class=" mx-auto rounded p-4 mt-2 overflow-y-auto">
                                     <div class="bg-stone-800 rounded">
                                         {{-- <h1 class="font-bold text-2xl mb-3">Modal Title</h1> --}}
                                         <div class="modal-body">
-                                            <iframe width="1280" height="720" src="https://www.youtube.com/embed/{{$details["videos"]["results"]["0"]["key"]}}" frameborder="0" allowfullscreen class="mx-auto rounded-2xl"></iframe>
+                                            <iframe id="iframe_video" width="1280" height="720" src="https://www.youtube.com/embed/{{$details["videos"]["results"]["0"]["key"]}}" frameborder="0" allowfullscreen class="mx-auto rounded-2xl"></iframe>
                                         </div>
-                                        <div class="mt-4">
-                                            {{-- <button class="bg-blue-700 text-white px-4 py-3 mt-4 text-sm rounded" @click="isOpen = false" x-ref="modalCloseButton">
-                                                Close Modal
-                                            </button> --}}
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -147,28 +159,32 @@
 
     
     {{-- Image Section --}}
-    <div class="images border-b-4 border-stone-600">
-        <div class="container mx-auto px-20 py-16 ">
+    @if ($details['images']['backdrops'])
 
-            <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
-                Images
-            </h2>
+        <div class="images border-b-4 border-stone-600">
+            <div class="container mx-auto px-20 py-16 ">
 
-            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-8">
+                <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
+                    Images
+                </h2>
 
-            @foreach ($details['images']['backdrops'] as $picture )
+                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-8">
 
-                    @if($loop->index < 6)
-                        <x-image :picture="$picture"></x-image>
-                    @endif
-                    
-                @endforeach
+                @foreach ($details['images']['backdrops'] as $picture )
 
+                        @if($loop->index < 6)
+                            <x-image :picture="$picture"></x-image>
+                        @endif
+                        
+                    @endforeach
+
+                </div>
 
             </div>
 
         </div>
-    </div>
+
+    @endif
 
 
 
@@ -182,8 +198,8 @@
 
             <div class=" gap-6 pb-8">
                 
-
-            @if ($comments)
+            
+            @if (count($comments) > 0)
                 
                 @foreach ($comments as $comment)
 
@@ -193,7 +209,7 @@
                 
             @else
 
-                <div class='bg-stone-800 border border-stone-600 p-6 my-4 rounded-2xl text-center text-xl'>
+                <div class='bg-stone-800 border border-stone-600 p-6 mx-5 my-4 rounded-2xl text-center text-xl'>
                     <p>no comments found!</p>
                 </div>
 
@@ -201,46 +217,49 @@
             
             @auth
                 <div x-data="{ isOpen: false }" >
-                    <button class="bg-eyecandy rounded-xl font-semibold px-5 py-4 hover:scale-110 hover:bg-teal-600 text-black mt-4 ease-in-out duration-300 " @click="isOpen = true
-                        $nextTick(() => $refs.modalCloseButton.focus())"
+
+                    <button class="bg-eyecandy rounded-xl font-semibold px-5 py-4 ml-5 hover:scale-110 hover:bg-teal-600 text-black mt-4 ease-in-out duration-300 " onclick="window.location.href='#top'" @click="isOpen = true, scrollLock(true)"
                         >
                         <i class="fa-solid fa-comment"></i>
                         Comment
                     </button>
-                    {{-- Comment Modal --}}
-                    <div class="z-50 mx-auto my-auto absolute top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto" x-show="isOpen" @keydown.escape.window="isOpen = false" >
-                        <div class="mx-auto rounded p-4 mt-2 overflow-y-auto">
-                            <div class="bg-stone-800 rounded">
-                                <form method="POST" action="/users/authenticate">
-                                    @csrf
-                                    
-                                    <div class="mb-6 p-5 rounded-2xl">
-                                        <h3>Post a Comment</h3>
-                                        <label for="content" class="inline-block text-lg mb-2 text-eyecandy">
-                                            Content
-                                        </label>
-                                        <textarea
-                                            class="border border-gray-200 rounded p-2 w-full"
-                                            name="description"
-                                            rows="10"
-                                        >
-                                        {{old('content')}}
-                                        </textarea>
-                    
-                                        @error('content')
-                                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                                        @enderror
-                    
-                                    </div>
 
-                                    <div class="mb-6 mx-auto">
-                                        <button class="bg-eyecandy hover:bg-teal-600 ease-in-out duration-300 text-black text-white rounded py-2 px-4 hover:bg-black">
-                                            Submit
-                                        </button>
+                    {{-- Comment Modal --}}
+                    <div class="z-50 mx-auto my-auto absolute top-0 left-0 w-full h-full flex items-center bg-black/75 overflow-y-auto" x-show="isOpen" 
+                                @keydown.escape.window="isOpen = false, scrollLock(false)" 
+                                @click="isOpen = false, scrollLock(false)">
+                        <div class="mx-auto rounded-xl p-4 mt-2 overflow-y-auto">
+                            <div class="bg-stone-800 rounded ">
+                                <div class="modal-body">
+                                    <form method="POST" action="/listings/{{$details['id']}}">
+                                        @csrf
+                                        
+                                        <div class="mb-6 p-5 rounded-2xl">
+                                            <h3>Post a Comment</h3>
+                                            <label for="content" class="inline-block text-lg mb-2 text-eyecandy">
+                                                Content
+                                            </label>
+                                            <textarea
+                                                class="border border-gray-200 rounded p-2 w-full text-black"
+                                                name="content"
+                                                rows="20"
+                                            >{{old('content')}}
+                                            </textarea>
                         
-                                        <a href="/" class="text-black ml-4 text-eyecandy"> Back </a>
-                                    </div>
-                                </form>
+                                            @error('content')
+                                                <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                                            @enderror
+                        
+                                        </div>
+
+                                        <div class="mb-6 mx-auto">
+                                            <button class="bg-eyecandy hover:bg-teal-600 ease-in-out duration-300 text-black rounded py-2 px-4">
+                                                Submit
+                                            </button>
+                            
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

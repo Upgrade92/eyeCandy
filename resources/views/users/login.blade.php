@@ -85,7 +85,7 @@
                 <div class="mb-6">
                     <button
                         type="submit"
-                        class="bg-teal-600 text-white rounded py-2 px-4 hover:bg-teal-400 text-black font-semibold hover:scale-110 ease-in-out duration-300">
+                        class="bg-teal-600 rounded py-2 px-4 hover:bg-teal-400 text-black font-semibold hover:scale-110 ease-in-out duration-300">
                         Login
                     </button>
                 </div>

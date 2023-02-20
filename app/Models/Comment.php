@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class Comment extends Model
 {
@@ -20,7 +21,17 @@ class Comment extends Model
         return $comments;
     }
 
-    public static function store(Request $request){
+    public static function store($formFields,$movie_id){
+        // dd($formFields);
+        DB::table('comments')->insert([
+            'creator_id'=>auth()->id(),
+            'movie_id' =>$movie_id,
+            'content'=>$formFields['content'],
 
+        ]);
+
+        DB::table('users')->where('id', auth()->user()->id)->increment(
+            'comments');
+        
     }
 }
