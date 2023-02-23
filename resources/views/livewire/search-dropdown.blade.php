@@ -6,6 +6,7 @@
         type="text" class="bg-stone-700 rounded-full w-56 px-4 pl-8 py-1  focus:shadow-outline" 
         placeholder="search..."
         @focus="isOpen = true"
+        @keydown="isOpen = true"
         @keydown.escape.window="isOpen = false"
         @keydown.shift.tab="isOpen = false"
     >
@@ -14,10 +15,12 @@
         <i class="text-gray-500 mt-2 ml-2 fa-solid fa-magnifying-glass"></i>
     </div>
 
+    
+
     @if (strlen($search)>2)
 
-        <div class="absolute bg-stone-700 rounded text-gray-500 w-52 z-10 ml-2" 
-             x-show="isOpen"
+        <div class="absolute bg-stone-700 rounded text-white w-52 z-10 ml-2" 
+             x-show.transition.opacity="isOpen"
              >
             
             @if (count($searchResults) > 0)

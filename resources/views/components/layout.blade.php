@@ -20,7 +20,7 @@
         <livewire:styles>
         
         {{-- not working --}}
-        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
+        {{-- <script src="{{asset('js/app.js')}}" type="text/javascript"></script> --}}
         {{-- <script src="{{ url('/public/resources/js/app.js') }}"></script> --}}
         {{-- <script src="{{ asset('public/js/app.js') }}"></script> --}}
         @vite('resources/js/app.js')
@@ -44,10 +44,11 @@
                         },
                     },
                 },
+                
             };
         </script>
 
-    {{-- <style>
+    <style>
 
         :root {
         --scrollcolor: #fff;
@@ -197,7 +198,7 @@
         cursor: pointer;
         }
 
-    </style> --}}
+    </style>
 
 
 

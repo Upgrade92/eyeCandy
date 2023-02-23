@@ -5,7 +5,7 @@ function reloadFrame(){
     document.getElementById('videoModal').src = document.getElementById('videoModal').src;
 }
 
-function bsd(status) {
+function scrollLock(status) {
 	var body = document.querySelector("body");
 
 	var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
