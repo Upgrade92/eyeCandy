@@ -5,11 +5,11 @@ namespace App\ViewModels;
 use Carbon\Carbon;
 use Spatie\ViewModels\ViewModel;
 
-class MovieViewModel extends ViewModel
+class TvShowViewModel extends ViewModel
 {
     public $details;
     public $comments;
-    public function __construct($details,$comments)
+    public function __construct($details, $comments)
     {
         $this -> details = $details;
         $this -> comments = $comments;
@@ -23,7 +23,7 @@ class MovieViewModel extends ViewModel
                 ? 'https://image.tmdb.org/t/p/w300'.$this->details['poster_path']
                 : asset('/images/no-cover.png'),
             'vote_average' => number_format($this->details['vote_average'] * 10, 0) .'%',
-            'release_date' => Carbon::parse($this->details['release_date'])->format('M d Y'),
+            'first_air_date' => Carbon::parse($this->details['first_air_date'])->format('M d Y'),
             'genres' => collect($this->details['genres'])->pluck('name')->flatten()->implode(', '),
             'crew' => collect($this->details['credits']['crew'])->take(3),
             'cast' => collect($this->details['credits']['cast'])->take(5),

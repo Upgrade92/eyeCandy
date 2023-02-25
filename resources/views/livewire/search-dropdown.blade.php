@@ -33,7 +33,7 @@
                     
                             <li class="border-b text-sm border-gray-500">
 
-                                <a href="/listings/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
+                                <a href="/movies/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
                                     <div class="flex">
 
                                         @if ($result['poster_path'])

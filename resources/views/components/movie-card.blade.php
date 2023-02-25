@@ -1,5 +1,5 @@
-<div class="mt-8 bg-stone-600 pb-3 rounded-xl scale-90 hover:scale-100 hover:border-2 hover:border-eyecandy ease-in-out duration-100">
-    <a href="/listings/{{$movie['id']}}" class="">
+<div class="mt-8 bg-stone-600 pb-16 rounded-xl scale-90 hover:scale-100 hover:border-2 hover:border-eyecandy ease-in-out duration-100">
+    <a href="/movies/{{$movie['id']}}" class="">
         
         <img
             class=" mb-6 rounded-t-xl mx-auto"
@@ -7,12 +7,12 @@
             alt="poster"
         />
 
-        <div class="px-4 pb-3">
+        <div class="px-4 pb-8">
 
             <h3 class="text-center text-lg text-eyecandy font-semibold">{{$movie['title']}}</h3>
             <div class="px-2 text-right">
 
-                <div class="grid grid-cols-6 pt-4">
+                <div class="grid grid-cols-6 py-4 absolute inset-x-0 bottom-0 h-22 px-3">
 
                     <div class="col-start-1 col-end-2">
                         <span class="text-eyecandy">Raiting:</span>
@@ -32,7 +32,7 @@
                     <div class="col-start-1 col-end-2">
                         <span class="text-eyecandy">Genre(s):</span>
                     </div>
-                    <div class="col-end-7 col-span-4"> 
+                    <div class="col-end-7 col-span-4 truncate"> 
                         {{ $movie['genres']}}
                     </div>
 

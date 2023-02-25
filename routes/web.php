@@ -2,31 +2,33 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ListingController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\ActorsController;
+use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\SeriesController;
 
 
 // Home View // All titles
-Route::get('/', [ListingController::class, 'index']);
-
-
+Route::get('/', [MoviesController::class, 'index']);
 //Single title
-Route::get('/listings/{listing}', [ListingController::class, 'show'] ,
-    
-);
+Route::get('/movies/{id}', [MoviesController::class, 'show']);
+
+
+// All series
+Route::get('/series', [SeriesController::class, 'index']);
+//Single TV-show
+Route::get('/series/{id}', [SeriesController::class, 'show']);
+
+
+// All actors
+Route::get('/actors', [ActorsController::class, 'index']);
+// All actors per page
+Route::get('/actors/page/{page?}', [ActorsController::class, 'index']);
+//Single title
+Route::get('/actors/{id}', [ActorsController::class, 'show']);
 
 // store Comment
-Route::post('/listings/{id}', [ListingController::class, 'store'])->middleware('auth');
+Route::post('/movies/{id}', [MoviesController::class, 'store'])->middleware('auth');
+
 
 // Show User Profile
 Route::get('/profile', [UserController::class, 'show']);

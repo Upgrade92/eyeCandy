@@ -19,14 +19,14 @@
             </li>
 
             <li class="md:ml-6 mt-1 text-center">
-                <a href="/" class="hover:text-eyecandy ease-in duration-300"> 
+                <a href="/series" class="hover:text-eyecandy ease-in duration-300"> 
                     <i class="fa-solid fa-clapperboard"></i>
                     Series
                 </a>
             </li>
 
             <li class="md:ml-6 mt-1 text-center">
-                <a href="/" class="hover:text-eyecandy ease-in duration-300">
+                <a href="/actors" class="hover:text-eyecandy ease-in duration-300">
                     <i class="fa-solid fa-user"></i> 
                     Actors
                 </a>

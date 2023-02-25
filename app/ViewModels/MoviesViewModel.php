@@ -5,7 +5,7 @@ namespace App\ViewModels;
 use Carbon\Carbon;
 use Spatie\ViewModels\ViewModel;
 
-class ListingsViewModel extends ViewModel
+class MoviesViewModel extends ViewModel
 {
     public $popular;
     public $nowPlaying;

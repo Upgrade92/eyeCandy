@@ -5,50 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\ViewModels\MovieViewModel;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\ViewModels\ListingsViewModel;
+use App\ViewModels\MoviesViewModel;
 
-class ListingController extends Controller
+class MoviesController extends Controller
 {
     public function index()
     {
-        $popular = Http::withToken(config('services.tmdb.token'))
+        $popular = collect(Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/popular')
-            ->json()['results'];
+            ->json()['results'])
+            ->take(16);
 
 
-        $nowPlaying = Http::withToken(config('services.tmdb.token'))
+        $nowPlaying = collect(Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/now_playing')
-            ->json()['results'];
+            ->json()['results'])
+            ->take(16);
 
         $genres = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json()['genres'];
 
 
-        // $genres = collect($genresArray)->mapWithKeys(function ($genre) {
-        //     return [$genre['id'] => $genre['name']];
-        // });
-
         // dump($popular);
-        // dump($nowPlaying);
 
-        // return view('listings.index', [
-        //     'popular' => $popular,
-        //     'genres' => $genres,
-        //     'nowPlaying' => $nowPlaying,
-        // ]);
-
-
-        $viewModel = new ListingsViewModel(
+        $viewModel = new MoviesViewModel(
             $popular,
             $nowPlaying,
             $genres
         );
 
-        return view('listings.index', $viewModel);
+        return view('movies.index', $viewModel);
        
     }
 
@@ -57,7 +45,6 @@ class ListingController extends Controller
         $details = Http::withToken(config('services.tmdb.token'))
             ->get("https://api.themoviedb.org/3/movie/$id?append_to_response=credits,videos,images")
             ->json();
-        // dump($details);
 
         // $certifications = Http::withToken(config('services.tmdb.token'))
         //     ->get("https://api.themoviedb.org/3/certification/movie/list")
@@ -65,19 +52,9 @@ class ListingController extends Controller
         // dump($certifications);
 
         $comments = Comment::find_by_movieId($id);
-        // dump($comments);
+        $viewModel = new MovieViewModel($details, $comments);
 
-
-        $viewModel = new MovieViewModel($details);
-
-        // return view('listings.show', [
-        //     'details' => $details,
-
-        //     'comments' => $comments,
-
-        // ]); 
-
-        return view('listings.show', $viewModel, ['comments' => $comments]); 
+        return view('movies.show', $viewModel); 
     }
 
 

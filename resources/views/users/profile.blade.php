@@ -20,7 +20,6 @@
 
                         <img
                             class="w-40 mx-auto mb-6 rounded-full"
-                            {{-- src="{{$listing->logo ? asset('storage/'. $listing->logo) : asset('/images/no-image.png')}}" --}}
                             src="{{asset(auth()->user()->profile_img)}}"
                             alt=""
                         />
