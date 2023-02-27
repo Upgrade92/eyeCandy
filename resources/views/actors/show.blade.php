@@ -1,14 +1,14 @@
 <x-layout>
 
     {{-- Actor Info Section --}}
-    <div class="movie-info border-b-4 border-stone-600 gap-8">
+    <div class="movie-info border-b-4 border-stone-600 gap-8 ">
 
-        <div class="container mx-auto py-16 flex flex-col md:flex-row justify-center items-center col gap-1">
-            <div class="flex-none">
+        <div class="container mx-auto pt-16 flex flex-col md:flex-row col gap-1">
+            <div class="flex-none md:ml-16 mx-auto pb-12">
                 
                 {{-- Actor Image --}}
                 <img
-                    class="w-76 rounded-xl  mb-6 md:mb-0 resize-none"
+                    class="w-76 rounded-xl mb-6 md:mb-0 resize-none "
                     src="{{$actor['profile_path']}}"
                     alt="actor_image"
                 />
@@ -52,7 +52,7 @@
             </div>
            
             {{-- Actor Info --}}
-            <div class="px-10 mx-0 md:px-0 md:mx-10 md:pl-10">
+            <div class="px-6 mx-0 md:px-0 md:mx-2 md:pl-6">
 
                 <h2 class="text-4xl font-semibold text-eyecandy">{{$actor['name']}}</h2>
 
@@ -67,54 +67,85 @@
                         </span>
                     </p>      
 
-                    <p class="mt-10">
+                    <p class="mt-10 overflow-hidden pr-12">
                         {{$actor['biography']}}
                     </p>
                     
                     {{-- Known For --}}
-                    <h4 class="font-semibold text-eyecandy text-xl mt-12">Known For</h4>
+                    {{-- <h4 class="font-semibold text-eyecandy text-xl mt-12 pb-6">Known For</h4>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         
                         @foreach ($knownFor as $title)
                         
-                            <div class="mt-4 text-center bg-stone-600 rounded-xl hover:border-2 hover:border-eyecandy hover:scale-105 ease-in-out duration-300">
+                            <div class=" mx-auto w-32 mt-4 text-center bg-stone-800 rounded-xl hover:border-2 hover:border-eyecandy hover:scale-105 ease-in-out duration-300">
 
                                 <a href="{{$title['linkToPage']}}">
                                     <img 
-                                        class="rounded-xl  "
+                                        class="rounded-t-xl mx-auto"
                                         src="{{$title['poster_path']}}" 
                                         alt="movie_img" 
                                     >
-                                    <span class="text-eyecandy ">
+                                    <div class="text-eyecandy pt-1 truncate p-2">
                                         {{$title['title']}}
-                                    </span>
+                                    </div>
                                 </a>
 
                             </div>
                         
                         @endforeach
 
-                    </div>
+                    </div> --}}
                     
                 </div>
+                
 
             </div>
+            
+
+        </div>
+
+
+        <div class="container mx-auto">
+        <h4 class="font-semibold text-eyecandy text-xl pb-6 pl-12">Known For</h4>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12">
+            
+            @foreach ($knownFor as $title)
+            
+                <div class=" mx-auto w-32 mt-4 text-center bg-stone-800 rounded-xl hover:border-2 hover:border-eyecandy hover:scale-105 ease-in-out duration-300">
+
+                    <a href="{{$title['linkToPage']}}" title="{{$title['title']}}">
+                        <img 
+                            class="rounded-t-xl mx-auto"
+                            src="{{$title['poster_path']}}" 
+                            alt="movie_img" 
+                        >
+                        <div class="text-eyecandy pt-1 truncate p-2">
+                            {{$title['title']}}
+                        </div>
+                    </a>
+
+                </div>
+            
+            @endforeach
+
+        </div>
 
         </div>
 
     </div>
     
     {{-- Credits Section --}}
-    <div class="credits  border-stone-600">
+    <div class="credits border-stone-600">
 
         <div class="container mx-auto px-20 py-16">
 
             <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
                 Credits
             </h2>
-
-            <ul class="list-disc leading-loose pl-24 my-8">
+            
+            <ul class="list-disc leading-loose lg:pl-32 xl:pl-48 2xl:pl-64 my-8">
                 @foreach ($credits as $credit)
                     <li> 
                         <span class="font-semibold">{{$credit['release_year']}}</span>

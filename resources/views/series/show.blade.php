@@ -3,26 +3,23 @@
     {{-- Series Info Section --}}
     <div class="series-info border-b-4 border-stone-600 gap-8">
 
-        <div class="container mx-auto py-16 flex flex-col md:flex-row justify-center items-center col gap-1">
-            
+        <div class="container mx-auto py-16 flex flex-col md:flex-row justify-center items-center col gap-1">     
             
             <img
-                class="w-96 rounded-xl  mb-6 md:mb-0 resize-none "
+                class="w-72 rounded-xl  mb-6 md:mb-0 resize-none "
                 src="{{$details['poster_path']}}"
                 alt=""
-            />
-            
-
-            
+            />            
            
             <div class="px-10 mx-0 md:px-0 md:mx-10 ">
 
                 <h2 class="text-4xl font-semibold text-eyecandy">{{$details['name']}}</h2>
 
                 <div>
+                    {{-- {{dd($details)}} --}}
                     
                     <p class="text-sm mt-5">
-                        {{-- <span class="text-eyecandy">Duration:</span> {{$details['runtime']}}min --}}
+                        <span class="text-eyecandy">Raiting:</span> {{($details['vote_average'])}} <i class="fa-solid fa-star text-orange-500"></i>
                     </p>
                     <p class="text-sm">
                         <span class="text-eyecandy">First Air:</span> {{$details['first_air_date']}}
@@ -31,13 +28,23 @@
                         <span class="text-eyecandy">Genres:</span>
                         {{$details['genres']}}                             
                     </p>
+                    
+                    @if(isset($details['episode_run_time'][0]))
                     <p class="text-sm">
-                        <span class="text-eyecandy">Raiting:</span> {{($details['vote_average'])}} <i class="fa-solid fa-star text-orange-500"></i>
-                        </p>
+                        <span class="text-eyecandy">Runtime per Episode: </span> ~{{$details['episode_run_time'][0]}}min
+                    </p>
+                    @endif
+
+                    @if(isset($details['seasons']))
+                    <p class="text-sm">
+                        <span class="text-eyecandy">Seasons: </span> {{count($details['seasons'])}}
+                    </p>
+                    @endif
+
                     <p class="mt-10">
                         {{$details['overview']}}
                     </p>
-
+                    
 
                     {{-- Cast Section --}}
                     <div class="mt-16">	
@@ -148,7 +155,7 @@
             
                @foreach ($details['cast'] as $cast )
 
-                    <x-actor-card :cast="$cast"></x-actor-card>
+                    <x-actor-card-small :cast="$cast"></x-actor-card-small>
 
                 @endforeach
 
@@ -247,7 +254,7 @@
 
                                         <div class="modal-body px-4 pb-1">
                                             
-                                            <form method="POST" action="/movies/{{$details['id']}}" >
+                                            <form method="POST" action="/comment/{{$details['id']}}" >
                                                 @csrf
                                                 
                                                 <div class="mb-6 rounded-2xl text-center">

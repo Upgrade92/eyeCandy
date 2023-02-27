@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     // show user Profile
     public function show(){
-        return view('users.profile');
+        return view('users.show');
     }
 
     // Show Register/Create Form
@@ -49,12 +49,10 @@ class UserController extends Controller
         return redirect('/')->with('message', 'You have been logged out!');
     }
 
-
     // show Login form
     public function login(){
         return view('users.login');
     }
-
 
      // Login user
      public function authenticate(Request $request){

@@ -3,15 +3,16 @@
     {{-- Title Info Section --}}
     <div class="movie-info border-b-4 border-stone-600 gap-8">
 
-        <div class="container mx-auto py-16 flex flex-col md:flex-row justify-center items-center col gap-1">
+        <div class="container mx-auto py-16 flex flex-col md:flex-row col gap-1">
+            <div class="flex-none md:ml-16 pb-12">
             
-            
-            <img
-                class="w-96 rounded-xl  mb-6 md:mb-0 resize-none "
-                src="{{$details['poster_path']}}"
-                alt=""
-            />
-            
+                <img
+                    class="w-76 rounded-xl  mb-6 md:mb-0 resize-none mx-auto"
+                    src="{{$details['poster_path']}}"
+                    alt=""
+                />
+
+            </div>
            
             <div class="px-10 mx-0 md:px-0 md:mx-10 ">
 
@@ -20,6 +21,9 @@
                 <div>
                     
                     <p class="text-sm mt-5">
+                        <span class="text-eyecandy">Raiting:</span> {{($details['vote_average'])}} <i class="fa-solid fa-star text-orange-500"></i>
+                    </p>
+                    <p class="text-sm">
                         <span class="text-eyecandy">Duration:</span> {{$details['runtime']}}min
                     </p>
                     <p class="text-sm">
@@ -29,9 +33,7 @@
                         <span class="text-eyecandy">Genres:</span>
                         {{$details['genres']}}                             
                     </p>
-                    <p class="text-sm">
-                        <span class="text-eyecandy">Raiting:</span> {{($details['vote_average'])}} <i class="fa-solid fa-star text-orange-500"></i>
-                        </p>
+                    
                     <p class="mt-10">
                         {{$details['overview']}}
                     </p>
@@ -149,9 +151,9 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-8 px-6">
             
                @foreach ($details['cast'] as $cast )
-
-                    <x-actor-card :cast="$cast"></x-actor-card>
-
+                    
+                    <x-actor-card-small :cast="$cast"></x-actor-card-small>
+                    
                 @endforeach
 
             </div>
@@ -163,14 +165,15 @@
     {{-- Image Section --}}
     @if (count($details['images']) > 0)
 
-        <div class="movie-images border-b-4 border-stone-600" x-data="{ isOpen: false, image: ''}">
+        <div class="movie-images border-b-4 border-stone-600">
+
             <div class="container mx-auto px-20 py-16 ">
 
                 <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
                     Images
                 </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 pb-8">
 
                     @foreach ($details['images'] as $image )
 
@@ -235,7 +238,7 @@
                             style="background-color: rgba(0, 0, 0, .9);"
                             class="fixed top-0 left-0 w-full h-full flex items-center  overflow-y-auto"
                         >
-                            <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
+                            <div class="container mx-auto px-32 rounded-lg overflow-y-auto">
 
                                 <div class="bg-stone-900 rounded-xl">
                                     <div class="flex justify-end mr-4">
@@ -248,7 +251,7 @@
 
                                     <div class="modal-body px-4 pb-1">
                                         
-                                        <form method="POST" action="/movies/{{$details['id']}}" >
+                                        <form method="POST" action="/comment/{{$details['id']}}" >
                                             @csrf
                                             
                                             <div class="mb-6 rounded-2xl text-center">

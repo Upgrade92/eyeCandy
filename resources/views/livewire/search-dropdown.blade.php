@@ -29,29 +29,61 @@
                     
                     @foreach ( $searchResults as $result )
 
-                        @if ($loop->index < 5)
+                        @if ($loop->index < 6)
                     
                             <li class="border-b text-sm border-gray-500">
 
-                                <a href="/movies/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
+                                @if($result['media_type'] == 'movie')
+                                    <a href="/movies/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
+                                @elseif($result['media_type'] == 'tv')
+                                    <a href="/series/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
+                                @else
+                                    <a href="/actors/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
+                                @endif
+
                                     <div class="flex">
 
-                                        @if ($result['poster_path'])
+                                        @if (isset($result['poster_path']))
                                             <img
                                                 class="w-12 rounded-xl"
                                                 src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}"
                                                 alt=""
                                             />
-                                        @else
+                                        @elseif (isset($result['profile_path']))
+                                            <img
+                                                class="w-12 rounded-xl"
+                                                src="https://image.tmdb.org/t/p/w92/{{$result['profile_path']}}"
+                                                alt=""
+                                            />
+                                        @else  
                                             <img
                                                 class="w-12 rounded-xl"
                                                 src="{{asset('/images/no-cover.png')}}"
                                                 alt=""
-                                            />  
+                                            />
                                         @endif
                                     
                                         <div class="ml-4 my-auto font-semibold">
-                                            {{$result['title']}}
+
+                                            @if(isset($result['title']))
+
+                                                {{$result['title']}}
+                                                <br>
+                                                <span class="text-sm text-gray-400">movie</span>
+
+                                            @else 
+                                            
+                                                {{$result['name']}}
+                                                <br>
+
+                                                @if ($result['media_type'] == 'tv')
+                                                    <span class="text-sm text-gray-400">series</span>
+                                                @else
+                                                <span class="text-sm text-gray-400">actor</span>
+                                                @endif
+
+                                            @endif
+                                        
                                         </div>
                                 
                                     </div> 

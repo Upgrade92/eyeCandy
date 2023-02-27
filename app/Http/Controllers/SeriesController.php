@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use App\ViewModels\SeriesViewModel;
 use App\ViewModels\TvShowViewModel;
 use Illuminate\Support\Facades\Http;
@@ -46,10 +45,12 @@ class SeriesController extends Controller
             ->get("https://api.themoviedb.org/3/tv/$id?append_to_response=credits,videos,images")
             ->json();
 
-        $comments = Comment::find_by_movieId($id);
+        if(isset($details['success'])){
+            return redirect('/')->with('msessage','not found');
+        }
+        
+        $comments = Comment::find_by_movieId($id, 'series');
         $viewModel = new TvShowViewModel($details, $comments);
-
-        // $viewModel = new TvShowViewModel($details);
 
         return view('series.show', $viewModel); 
     }

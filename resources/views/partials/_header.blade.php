@@ -41,7 +41,7 @@
             @auth
             <div class="mx-4 flex my-3 md:my-0">
                 
-                <a href="/profile" title="My profile">
+                <a href="/show" title="My profile">
                     <img class="mx-3  w-11 rounded-full hover:scale-110 ease-in duration-300" src="{{asset(auth()->user()->profile_img)}}" alt="">
                 </a>
 

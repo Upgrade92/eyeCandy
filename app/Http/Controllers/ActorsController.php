@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\ViewModels\ActorViewModel;
 use App\ViewModels\ActorsViewModel;
 use Illuminate\Support\Facades\Http;
 
 class ActorsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($page=1)
     {
         abort_if($page > 500, 204);
@@ -41,6 +35,11 @@ class ActorsController extends Controller
         $credits = Http::withToken(config('services.tmdb.token'))
             ->get("https://api.themoviedb.org/3/person/$id/combined_credits")
             ->json();
+
+
+        if(isset($actor['success'])){
+            return redirect('/')->with('msessage','not found');
+        }
 
         $viewModel = new ActorViewModel($actor, $social, $credits);
 

@@ -17,7 +17,6 @@ class TvShowViewModel extends ViewModel
 
     public function details()
     {
-        // return $this->details;
         return collect($this->details)->merge([
             'poster_path' => $this->details['poster_path']
                 ? 'https://image.tmdb.org/t/p/w300'.$this->details['poster_path']
