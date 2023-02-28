@@ -9,6 +9,8 @@ use App\ViewModels\MoviesViewModel;
 
 class MoviesController extends Controller
 {
+
+    // Get popular and now playing movies
     public function index()
     {
         $popular = collect(Http::withToken(config('services.tmdb.token'))
@@ -36,6 +38,8 @@ class MoviesController extends Controller
         return view('movies.index', $viewModel);     
     }
 
+
+    // Schow Single Movie
     public function show($id){
 
         $details = Http::withToken(config('services.tmdb.token'))

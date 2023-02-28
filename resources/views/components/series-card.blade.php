@@ -1,4 +1,5 @@
 <div class="mt-8 bg-stone-600 pb-16 rounded-xl scale-90 hover:scale-95 hover:border-2 hover:border-eyecandy ease-in-out duration-100">
+
     <a href="/series/{{$tvshow['id']}}" class="">
         
         <img
@@ -43,4 +44,5 @@
         </div>
 
     </a>
+    
 </div>

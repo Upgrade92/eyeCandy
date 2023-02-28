@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 class SeriesController extends Controller
 {
     
+    // get Popular and TopRated Series
     public function index()
     {
         $popular = collect(Http::withToken(config('services.tmdb.token'))
@@ -39,6 +40,7 @@ class SeriesController extends Controller
     }
 
     
+    // Show Single TV-Show
     public function show($id){
 
         $details = Http::withToken(config('services.tmdb.token'))

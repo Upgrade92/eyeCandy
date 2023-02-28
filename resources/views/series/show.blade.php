@@ -45,8 +45,7 @@
                         {{$details['overview']}}
                     </p>
                     
-
-                    {{-- Cast Section --}}
+                    {{-- Crew Section --}}
                     <div class="mt-16">	
 
                         <div class="flex mt-4">
@@ -68,7 +67,6 @@
                         </div>
 
                     </div>
-
 
                     {{-- Trailer Section --}}
                     <div x-data="{ isOpen: false }">
@@ -143,27 +141,29 @@
     </div>
     
     {{-- Cast Section --}}
-    <div class="movie-cast border-b-4 border-stone-600">
+    @if(count($details['cast'])>0)
+        <div class="movie-cast border-b-4 border-stone-600">
 
-        <div class="container mx-auto px-20 py-16">
+            <div class="container mx-auto px-20 py-16">
 
-            <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
-                Cast
-            </h2>
+                <h2 class="text-4xl font-semibold text-eyecandy pb-12 pl-12 md:pl-8">
+                    Cast
+                </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-8 px-6">
-            
-               @foreach ($details['cast'] as $cast )
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-8 px-6">
+                
+                @foreach ($details['cast'] as $cast )
 
-                    <x-actor-card-small :cast="$cast"></x-actor-card-small>
+                        <x-actor-card-small :cast="$cast"></x-actor-card-small>
 
-                @endforeach
+                    @endforeach
+
+                </div>
 
             </div>
 
         </div>
-
-    </div>
+    @endif
 
     {{-- Image Section --}}
     @if (count($details['images']) > 0)

@@ -13,7 +13,9 @@ class CommentController extends Controller
         $formFields = $request->validate([
             'content' => 'required',
         ]);
+
         Comment::store($formFields, $movie_id);
         return back()->with('message','comment created!');
     }
+    
 }

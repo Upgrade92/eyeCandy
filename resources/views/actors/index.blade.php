@@ -26,6 +26,8 @@
     </div>
 
 @section('scripts')
+
+    {{-- Infinite Scroll --}}
     <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
     <script>
         var elem = document.querySelector('.grid');

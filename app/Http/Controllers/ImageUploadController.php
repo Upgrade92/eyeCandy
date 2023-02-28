@@ -16,10 +16,10 @@ class ImageUploadController extends Controller
         $imageName = auth()->user()->name.'_profile_pic.'.$request->image->extension();  
         $request->image->move(public_path('images/profile_pics'), $imageName);
     
-
         DB::table('users')->where('id', auth()->user()->id)
             ->update(['profile_img' => '/images/profile_pics/'.$imageName]);
       
         return redirect('show')->with('message','image uploaded!');
     }
+    
 }

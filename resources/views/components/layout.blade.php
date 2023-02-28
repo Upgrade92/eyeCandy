@@ -18,11 +18,6 @@
         />
 
         <livewire:styles>
-        
-        {{-- not working --}}
-        {{-- <script src="{{asset('js/app.js')}}" type="text/javascript"></script> --}}
-        {{-- <script src="{{ url('/public/resources/js/app.js') }}"></script> --}}
-        {{-- <script src="{{ asset('public/js/app.js') }}"></script> --}}
         @vite('resources/js/app.js')
 
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
@@ -58,7 +53,7 @@
             window.onscroll = function () {};
 
             if (status === true) {
-                // Check window scroll exists else use traditional method
+
                 if (window.onscroll !== null) {
                     // if any scroll is attempted, set this to the previous value
                     window.onscroll = function () {
@@ -67,7 +62,6 @@
                 }
             } 
             else {
-                //body.classList.remove("fixed", "overflow-y-scroll");
                 window.onscroll = function () {};
                 }
             }
@@ -85,6 +79,7 @@
 
         @include('partials._header')
         <x-flash-message></x-flash-message>
+       
         <main>
             {{$slot}}
         </main>
@@ -92,6 +87,7 @@
         @include('partials._footer')
         <livewire:scripts>
         @yield('scripts')
+
     </body>
 
 </html>

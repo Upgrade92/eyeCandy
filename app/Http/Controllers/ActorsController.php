@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class ActorsController extends Controller
 {
+
+    // Show Popular Actors
     public function index($page=1)
     {
         abort_if($page > 500, 204);
@@ -21,6 +23,8 @@ class ActorsController extends Controller
         return view('actors.index', $viewModel);
     }
 
+
+    //Schow Single Actor
     public function show($id)
     {
 

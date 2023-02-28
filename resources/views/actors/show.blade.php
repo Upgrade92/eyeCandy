@@ -71,41 +71,14 @@
                         {{$actor['biography']}}
                     </p>
                     
-                    {{-- Known For --}}
-                    {{-- <h4 class="font-semibold text-eyecandy text-xl mt-12 pb-6">Known For</h4>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        
-                        @foreach ($knownFor as $title)
-                        
-                            <div class=" mx-auto w-32 mt-4 text-center bg-stone-800 rounded-xl hover:border-2 hover:border-eyecandy hover:scale-105 ease-in-out duration-300">
-
-                                <a href="{{$title['linkToPage']}}">
-                                    <img 
-                                        class="rounded-t-xl mx-auto"
-                                        src="{{$title['poster_path']}}" 
-                                        alt="movie_img" 
-                                    >
-                                    <div class="text-eyecandy pt-1 truncate p-2">
-                                        {{$title['title']}}
-                                    </div>
-                                </a>
-
-                            </div>
-                        
-                        @endforeach
-
-                    </div> --}}
                     
                 </div>
                 
-
             </div>
-            
-
+ 
         </div>
 
-
+        {{-- Known For --}}
         <div class="container mx-auto">
         <h4 class="font-semibold text-eyecandy text-xl pb-6 pl-12">Known For</h4>
 
@@ -116,6 +89,7 @@
                 <div class=" mx-auto w-32 mt-4 text-center bg-stone-800 rounded-xl hover:border-2 hover:border-eyecandy hover:scale-105 ease-in-out duration-300">
 
                     <a href="{{$title['linkToPage']}}" title="{{$title['title']}}">
+
                         <img 
                             class="rounded-t-xl mx-auto"
                             src="{{$title['poster_path']}}" 
@@ -124,13 +98,12 @@
                         <div class="text-eyecandy pt-1 truncate p-2">
                             {{$title['title']}}
                         </div>
+
                     </a>
 
                 </div>
             
             @endforeach
-
-        </div>
 
         </div>
 
@@ -155,7 +128,6 @@
                     </li>
                 @endforeach 
             </ul>
-
 
         </div>
 

@@ -11,8 +11,7 @@ use App\Http\Controllers\ImageUploadController;
 
 // Home View // All titles
 Route::get('/', [MoviesController::class, 'index']);
-Route::get('/movies', [MoviesController::class, 'index']);
-
+Route::get('/movies', function() { return redirect('/');});
 //Single title
 Route::get('/movies/{id}', [MoviesController::class, 'show']);
 
@@ -20,7 +19,6 @@ Route::get('/movies/{id}', [MoviesController::class, 'show']);
 
 // All series
 Route::get('/series', [SeriesController::class, 'index']);
-
 //Single TV-show
 Route::get('/series/{id}', [SeriesController::class, 'show']);
 
@@ -68,5 +66,5 @@ Route::post('/upload', [ImageUploadController::class, 'store'])->middleware('aut
 
 // Redirect 404 to Home
 Route::any('{query}',
-    function() { return redirect('/')->with('message','not found'); })
+    function() { return redirect('/')->with('message','Content not found'); })
     ->where('query', '.*');

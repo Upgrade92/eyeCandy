@@ -14,9 +14,7 @@
     <div class="absolute top-0">
         <i class="text-gray-500 mt-2 ml-2 fa-solid fa-magnifying-glass"></i>
     </div>
-
     
-
     @if (strlen($search)>2)
 
         <div class="absolute bg-stone-700 rounded text-white w-52 z-10 ml-2" 
@@ -41,54 +39,54 @@
                                     <a href="/actors/{{$result['id']}}" class="block hover:bg-gray-700 px-3 py-3">
                                 @endif
 
-                                    <div class="flex">
+                                        <div class="flex">
 
-                                        @if (isset($result['poster_path']))
-                                            <img
-                                                class="w-12 rounded-xl"
-                                                src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}"
-                                                alt=""
-                                            />
-                                        @elseif (isset($result['profile_path']))
-                                            <img
-                                                class="w-12 rounded-xl"
-                                                src="https://image.tmdb.org/t/p/w92/{{$result['profile_path']}}"
-                                                alt=""
-                                            />
-                                        @else  
-                                            <img
-                                                class="w-12 rounded-xl"
-                                                src="{{asset('/images/no-cover.png')}}"
-                                                alt=""
-                                            />
-                                        @endif
-                                    
-                                        <div class="ml-4 my-auto font-semibold">
-
-                                            @if(isset($result['title']))
-
-                                                {{$result['title']}}
-                                                <br>
-                                                <span class="text-sm text-gray-400">movie</span>
-
-                                            @else 
-                                            
-                                                {{$result['name']}}
-                                                <br>
-
-                                                @if ($result['media_type'] == 'tv')
-                                                    <span class="text-sm text-gray-400">series</span>
-                                                @else
-                                                <span class="text-sm text-gray-400">actor</span>
-                                                @endif
-
+                                            @if (isset($result['poster_path']))
+                                                <img
+                                                    class="w-12 rounded-xl"
+                                                    src="https://image.tmdb.org/t/p/w92/{{$result['poster_path']}}"
+                                                    alt=""
+                                                />
+                                            @elseif (isset($result['profile_path']))
+                                                <img
+                                                    class="w-12 rounded-xl"
+                                                    src="https://image.tmdb.org/t/p/w92/{{$result['profile_path']}}"
+                                                    alt=""
+                                                />
+                                            @else  
+                                                <img
+                                                    class="w-12 rounded-xl"
+                                                    src="{{asset('/images/no-cover.png')}}"
+                                                    alt=""
+                                                />
                                             @endif
                                         
-                                        </div>
-                                
-                                    </div> 
+                                            <div class="ml-4 my-auto font-semibold">
 
-                                </a>
+                                                @if(isset($result['title']))
+
+                                                    {{$result['title']}}
+                                                    <br>
+                                                    <span class="text-sm text-gray-400">movie</span>
+
+                                                @else 
+                                                
+                                                    {{$result['name']}}
+                                                    <br>
+
+                                                    @if ($result['media_type'] == 'tv')
+                                                        <span class="text-sm text-gray-400">series</span>
+                                                    @else
+                                                    <span class="text-sm text-gray-400">actor</span>
+                                                    @endif
+
+                                                @endif
+                                            
+                                            </div>
+                                    
+                                        </div> 
+
+                                    </a>
 
                             </li>
 

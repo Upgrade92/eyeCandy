@@ -11,15 +11,15 @@
                     alt=""
                 />
 
-            
-
                 <div class="p-1">
+                    
                     <div class=" text-eyecandy">
                         {{$cast['name']}}
                     </div>
 
                     <div class="text-sm "">
                         {{$cast['character']}}
+
                     </div>
                 </div>
 
